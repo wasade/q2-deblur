@@ -10,7 +10,8 @@ import importlib
 from q2_types.feature_table import FeatureTable, Frequency
 from q2_types.feature_data import FeatureData, Sequence
 from q2_types.sample_data import SampleData
-from q2_types.per_sample_sequences import (SequencesWithQuality,
+from q2_types.per_sample_sequences import (Sequences,
+                                           SequencesWithQuality,
                                            PairedEndSequencesWithQuality,
                                            JoinedSequencesWithQuality)
 
@@ -89,7 +90,8 @@ _outputs = [('table', FeatureTable[Frequency]),
 plugin.methods.register_function(
     function=q2_deblur.denoise_16S,
     inputs={
-        'demultiplexed_seqs': SampleData[SequencesWithQuality |
+        'demultiplexed_seqs': SampleData[Sequences |
+                                         SequencesWithQuality |
                                          PairedEndSequencesWithQuality |
                                          JoinedSequencesWithQuality],
     },
@@ -117,7 +119,8 @@ plugin.methods.register_function(
 plugin.methods.register_function(
     function=q2_deblur.denoise_other,
     inputs={
-        'demultiplexed_seqs': SampleData[SequencesWithQuality |
+        'demultiplexed_seqs': SampleData[Sequences |
+                                         SequencesWithQuality |
                                          PairedEndSequencesWithQuality |
                                          JoinedSequencesWithQuality],
         'reference_seqs': FeatureData[Sequence],
